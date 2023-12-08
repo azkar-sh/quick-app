@@ -1,7 +1,11 @@
 <script>
-	let showMenu = false;
+	import InboxContent from '$components/inboxContent.svelte';
+
+	let showMenu = true;
 	let taskMenu = false;
-	let inboxMenu = false;
+	let inboxMenu = true;
+
+	let users = [];
 
 	function handleTaskMenu() {
 		taskMenu = !taskMenu;
@@ -32,41 +36,79 @@
 			/>
 		</div>
 
-		<div class="self-end p-12 flex flex-row items-end gap-5">
-			<div class={`task-inbox ${showMenu ? 'visible' : 'hidden'}`}>
-				<button class="flex flex-col items-center gap-2 w-16" on:click={handleInboxMenu}>
-					<span class="text-white">Inbox</span>
-					<img src="/icons/btn-inbox.svg" alt="" />
-				</button>
-				<button class="flex flex-col items-center gap-2 w-16" on:click={handleTaskMenu}>
-					<span class="text-white">Task</span>
-					<img src="/icons/btn-task.svg" alt="" />
-				</button>
+		<div class="self-end p-10 flex flex-col items-end gap-5">
+			<!-- Quick Content -->
+
+			<div
+				class={`w-[734px] h-[737px] py-[24px] px-[32px] bg-white rounded-md flex flex-col gap-[22px]  ${
+					taskMenu || inboxMenu ? 'visible' : 'hidden'
+				}`}
+			>
+				{#if taskMenu}
+					<span class="text-2xl">Task Content</span>
+				{/if}
+
+				{#if inboxMenu}
+					<InboxContent />
+				{/if}
 			</div>
 
-			<button
-				class={`z-10 w-16 ${taskMenu || inboxMenu ? 'hidden' : ''}`}
-				on:click={handleQuickMenu}
-			>
-				<img src="/icons/btn-quick.svg" alt="" />
-			</button>
+			<!-- Quick Menus -->
+			<div class=" flex flex-row items-end gap-5">
+				<div class={`show-menu ${showMenu ? 'visible' : 'hidden'}`}>
+					{#if taskMenu}
+						<button class="flex flex-col items-center gap-2 w-16" on:click={handleInboxMenu}>
+							<img src="/icons/btn-inbox.svg" alt="" />
+						</button>
+						<button class="flex flex-col items-center gap-2 w-[72px]" on:click={handleTaskMenu}>
+							<img src="/icons/btn-task-open.svg" alt="" />
+						</button>
+					{:else if inboxMenu}
+						<button class="flex flex-col items-center gap-2 w-16" on:click={handleTaskMenu}>
+							<img src="/icons/btn-task.svg" alt="" />
+						</button>
+						<button class="flex flex-col items-center gap-2 w-[72px]" on:click={handleInboxMenu}>
+							<img src="/icons/btn-inbox-open.svg" alt="" />
+						</button>
+					{:else}
+						<button class="flex flex-col items-center gap-2 w-16" on:click={handleTaskMenu}>
+							<span class="text-white">Task</span>
+							<img src="/icons/btn-task.svg" alt="" />
+						</button>
+						<button class="flex flex-col items-center gap-2 w-16" on:click={handleInboxMenu}>
+							<span class="text-white">Inbox</span>
+							<img src="/icons/btn-inbox.svg" alt="" />
+						</button>
+					{/if}
+				</div>
+
+				<button
+					class={`z-10 w-16 ${taskMenu || inboxMenu ? 'hidden' : ''}`}
+					on:click={handleQuickMenu}
+				>
+					<img src="/icons/btn-quick.svg" alt="" />
+				</button>
+			</div>
 		</div>
 	</div>
 </div>
 
 <style>
-	.task-inbox {
+	.show-menu {
 		display: flex;
 		gap: 20px;
-		opacity: 0;
-		transform: translateX(100%);
 		transition:
 			opacity 0.3s ease-out,
 			transform 0.3s ease-out;
 	}
 
-	.task-inbox.visible {
+	.show-menu.visible {
 		opacity: 1;
 		transform: translateX(0);
+	}
+
+	.show-menu.hidden {
+		opacity: 0;
+		transform: translateX(100%);
 	}
 </style>
