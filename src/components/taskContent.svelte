@@ -7,12 +7,21 @@
 	let isLoadingData = false;
 	let editDescription = false;
 	let editDescriptionId = 0;
-	let addTask = true;
+	let addTask = false;
+	let showDetail = false;
+	let showDetailId = 0;
 
 	function handleEditDescription(id) {
 		editDescriptionId = id;
 		if (editDescriptionId === id) {
 			editDescription = !editDescription;
+		}
+	}
+
+	function handleShowDetail(id) {
+		showDetailId = id;
+		if (showDetailId === id) {
+			showDetail = !showDetail;
 		}
 	}
 
@@ -58,19 +67,27 @@
 				/>
 				<div class="w-full">
 					<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<!-- svelte-ignore a11y-no-static-element-interactions -->
 					<div
 						tabindex="0"
-						class={`collapse collapse-arrow ${data.task_complete ? '' : 'collapse-open'}`}
+						class={`collapse ${data.task_complete ? '' : 'collapse-open'}`}
+						on:click={handleShowDetail(data.task_id)}
 					>
-						<div class="collapse-title flex justify-between items-start py-0 min-h-0">
+						<div class="collapse-title flex justify-between items-start py-0 px-0 min-h-0">
 							<span
 								class={`w-2/4 font-semibold ${
 									data.task_complete ? 'line-through text-primary-light-grey' : ''
 								}`}>{data.task_title}</span
 							>
-							<div class="flex items-center gap-4">
+							<div class="flex items-center gap-4 me-2">
 								<span class="text-sm text-indicator-red">{data.task_due}</span>
 								<span>{data.task_date}</span>
+								{#if showDetailId === data.task_id || data.task_complete === false}
+									<Icon icon="iconamoon:arrow-down-2-bold" width="20" />
+								{:else}
+									<Icon icon="iconamoon:arrow-up-2-bold" width="20" />
+								{/if}
 								<div class="dropdown dropdown-bottom dropdown-end">
 									<div tabindex="0" role="button" class="">
 										<Icon icon="tabler:dots" width="24" />
@@ -130,7 +147,7 @@
 						<input type="text" placeholder="Type Task Title" class="input input-bordered rounded" />
 					</div>
 					<div class="flex items-center gap-4 me-2">
-						<span class="text-sm text-indicator-red"></span>
+						<Icon icon="iconamoon:arrow-up-2-bold" width="20" />
 						<div class="dropdown dropdown-bottom dropdown-end">
 							<div tabindex="0" role="button" class="">
 								<Icon icon="tabler:dots" width="24" />
@@ -143,7 +160,6 @@
 								<li><span class="text-indicator-red">Delete</span></li>
 							</ul>
 						</div>
-						<Icon icon="iconamoon:arrow-up-2-bold" width="20" />
 					</div>
 				</div>
 
