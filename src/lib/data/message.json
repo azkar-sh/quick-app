@@ -1,0 +1,153 @@
+[
+	{
+		"room_id": 1,
+		"title": "109220-Naturalization",
+		"user": "Chameron Phillips",
+		"user_id": 1,
+		"latest_message": "Please check this out!",
+		"date": "January 1, 2021 19:10",
+		"total_participants": 2,
+		"messages": [
+			{
+				"user": "Chameron Phillips",
+				"user_id": 1,
+				"message": "Please check this out!",
+				"date": "19:32"
+			},
+			{
+				"user": "Obaidullah Amarkhil",
+				"user_id": 3,
+				"message": "Cool, where do you find this?",
+				"date": "19:32"
+			},
+			{
+				"user": "Chameron Phillips",
+				"user_id": 1,
+				"message": "I found it on the internet",
+				"date": "19:32"
+			},
+			{
+				"user": "Chameron Phillips",
+				"user_id": 1,
+				"message": "I found it when I was searching for something",
+				"date": "19:32"
+			}
+		]
+	},
+	{
+		"room_id": 2,
+		"title": "Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up - Brief Service ]",
+		"user": "Ellen",
+		"user_id": 1,
+		"latest_message": "Hey, please read",
+		"date": "02/06/2021 10:45",
+		"total_participants": 3,
+		"messages": [
+			{
+				"user": "Ellen",
+				"user_id": 1,
+				"message": "Hey, please read",
+				"date": "19:32"
+			},
+			{
+				"user": "Ellen",
+				"user_id": 1,
+				"message": "No Worries, It will be complated ASAP. I've asked him yesterday.",
+				"date": "19:32"
+			},
+			{
+				"user": "Mary Hilda",
+				"user_id": 2,
+				"message": "Hello Obaidullah, I will be your case advisor for case #029290. I have assigned some homework for you to fill. Please keep up with the due dates. Should you have any questions, you can message me anytime. Thanks.",
+				"date": "19:32"
+			},
+			{
+				"user": "Ellen",
+				"user_id": 1,
+				"message": "Please contact Mary for questions regarding the case bcs she will be managing your forms from now on! Thanks Mary.",
+				"date": "19:32"
+			},
+			{
+				"user": "Mary Hilda",
+				"user_id": 2,
+				"message": "Sure thing, Claren.",
+				"date": "19:32"
+			},
+			{
+				"user": "",
+				"user_id": 0,
+				"message": "",
+				"date": "Today June 09, 2021"
+			},
+			{
+				"user": "Obaidullah Amarkhil",
+				"user_id": 3,
+				"message": "Morning. I’ll try to do them. Thanks.",
+				"date": "19:32"
+			},
+			{
+				"user": "Mary Hilda",
+				"user_id": 2,
+				"message": "Just Fill me in for his updates yea?",
+				"date": "19:32"
+			},
+			{
+				"user": "Ellen",
+				"user_id": 1,
+				"message": "No worries. It will be completed ASAP. I’ve asked him yesterday..",
+				"date": "19:32"
+			},
+			{
+				"user": "Mary Hilda",
+				"user_id": 2,
+				"message": "Hello Obaidullah, I will be your case advisor for case #029290. I have assigned some homework for you to fill. Please keep up with the due dates. Should you have any questions, you can message me anytime. Thanks.",
+				"date": "19:32"
+			},
+			{
+				"user": "Ellen",
+				"user_id": 1,
+				"message": "Please contact Mary for questions regarding the case bcs she will be managing your forms from now on! Thanks Mary.",
+				"date": "19:32"
+			},
+			{
+				"user": "Mary Hilda",
+				"user_id": 2,
+				"message": "Sure thing ,Claren.",
+				"date": "19:32"
+			}
+		]
+	},
+	{
+		"room_id": 3,
+		"title": "8405-Diana SALAZAR MUNGUIA",
+		"user": "Cameron Phillips",
+		"user_id": 1,
+		"latest_message": "I understand your initial concerns and thats very valid, Elizabeth. But you ...",
+		"date": "01/06/2021 12:19",
+		"total_participants": 0,
+		"messages": []
+	},
+	{
+		"room_id": 4,
+		"title": "FastVisa Support",
+		"user": "",
+		"user_id": 1,
+		"latest_message": "Hey there! Welcome to your inbox.",
+		"date": "01/06/2021 12:19",
+		"total_participants": 0,
+		"messages": [
+			{
+				"user": "FastVisa Support",
+				"user_id": 4,
+				"message": "Hey there. Welcome to your inbox! Contact us for more information and help about anything! We’ll send you a response as soon as possible.",
+				"date": "19:32"
+			},
+			{
+				"user": "",
+				"user_id": 1,
+				"message": "Hi, I need help with something can you help me ?",
+				"date": "19:32"
+			}
+		]
+	}
+]

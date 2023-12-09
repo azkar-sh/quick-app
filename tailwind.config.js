@@ -32,7 +32,9 @@ export default {
 	daisyui: {
 		themes: [
 			{
-				mytheme: {}
+				mytheme: {
+					primary: '#2f80ed'
+				}
 			}
 		]
 	},

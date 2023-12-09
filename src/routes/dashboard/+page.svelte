@@ -1,9 +1,10 @@
 <script>
 	import InboxContent from '$components/inboxContent.svelte';
+	import TaskContent from '$components/taskContent.svelte';
 
 	let showMenu = true;
-	let taskMenu = false;
-	let inboxMenu = true;
+	let taskMenu = true;
+	let inboxMenu = false;
 
 	let users = [];
 
@@ -41,11 +42,11 @@
 
 			<div
 				class={`w-[734px] h-[737px] py-[24px] px-[32px] bg-white rounded-md flex flex-col gap-[22px]  ${
-					taskMenu || inboxMenu ? 'visible' : 'hidden'
+					taskMenu || inboxMenu ? 'visible animate__animated animate__zoomIn' : 'hidden '
 				}`}
 			>
 				{#if taskMenu}
-					<span class="text-2xl">Task Content</span>
+					<TaskContent />
 				{/if}
 
 				{#if inboxMenu}

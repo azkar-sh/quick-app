@@ -1,59 +1,201 @@
 <script>
 	import Icon from '@iconify/svelte';
+	import users from '$json/message.json';
+	import { onMount } from 'svelte';
 
-	let datas = [
-		{
-			id: 1,
-			title: '109220-Naturalization',
-			user: 'Chameron Phillips',
-			message: 'Please check this out!',
-			date: 'January 1, 2021 19:10'
-		},
-		{
-			id: 2,
-			title: 'Jeannette Moraima Guaman Chamba (Hutto I-589) [ Hutto Follow Up - Brief Service ]',
-			user: 'Ellen',
-			message: 'Hey, please read',
-			date: '02/06/2021 10:45'
-		},
-		{
-			id: 3,
-			title: '8405-Diana SALAZAR MUNGUIA',
-			user: 'Cameron Phillips',
-			message: 'I understand your initial concerns and thats very valid, Elizabeth. But you ...',
-			date: '01/06/2021 12:19'
-		},
-		{
-			id: 4,
-			title: 'FastVisa Support',
-			user: '',
-			message: 'Hey there! Welcome to your inbox.',
-			date: '01/06/2021 12:19'
-		}
-	];
+	let datas = [];
+	let roomId = 0;
+	let isMessageLoading = false;
+
+	let messages = [];
+
+	function getMessages(roomId) {
+		messages = [];
+		isMessageLoading = true;
+		datas.forEach((data) => {
+			if (data.room_id === roomId) {
+				messages = data.messages;
+			}
+		});
+		setTimeout(() => {
+			isMessageLoading = false;
+		}, 2000);
+	}
+
+	onMount(() => {
+		isMessageLoading = true;
+		setTimeout(() => {
+			isMessageLoading = false;
+			datas = users;
+		}, 2000);
+	});
 </script>
 
-<div
-	class="border-[1px] border-primary-light-grey rounded-[5px] w-full h-[40px] py-[10px] px-[12px] flex items-center justify-center gap-4"
->
-	<span>Search</span>
-	<input type="text" class="w-[350px] h-full outline-none" />
-	<Icon icon="ph:magnifying-glass-bold" />
-</div>
-{#each datas as data, i}
-	<div class="flex gap-4 items-start">
-		<img src="/icons/user-group.svg" alt="" />
-		<div class="flex flex-col">
-			<div class="flex gap-4">
-				<span class=" text-primary-blue">{data.title}</span>
-				<span class=" text-black">{data.date}</span>
-			</div>
-			<span class="text-black font-bold">{data.user ? `${data.user} :` : ''}</span>
-			<span class="text-black">{data.message}</span>
-		</div>
+{#if roomId === 0}
+	<div
+		class="border-[1px] border-primary-light-grey rounded-[5px] w-full h-[40px] py-[10px] px-[12px] flex items-center justify-center gap-4"
+	>
+		<span>Search</span>
+		<input type="text" class="w-[350px] h-full outline-none" />
+		<Icon icon="ph:magnifying-glass-bold" />
 	</div>
+	{#if isMessageLoading}
+		<div class="flex flex-col items-center justify-center m-auto gap-4">
+			<Icon icon="line-md:loading-twotone-loop" width="64" />
+			<span class="">Loading Chats ...</span>
+		</div>
+	{:else}
+		{#each datas as data, i}
+			<div
+				class="flex gap-4 items-start animate__animated animate__fadeIn"
+				role="button"
+				tabindex="0"
+				on:click={() => {
+					roomId = data.room_id;
+					getMessages(data.room_id);
+				}}
+				on:keydown={() => {
+					roomId = data.room_id;
+					getMessages(data.room_id);
+				}}
+			>
+				<img src="/icons/user-group.svg" alt="" />
+				<div class="flex flex-col">
+					<div class="flex gap-4">
+						<span class=" text-primary-blue font-semibold">{data.title}</span>
+						<span class=" text-black">{data.date}</span>
+					</div>
+					<span class="text-black font-semibold text-sm">{data.user ? `${data.user} :` : ''}</span>
+					<span class="text-black">{data.latest_message}</span>
+				</div>
+			</div>
 
-	{#if i !== datas.length - 1}
-		<hr class="border-[1px] border-primary-light-grey w-full" />
+			{#if i !== datas.length - 1}
+				<hr class="border-[1px] border-primary-light-grey w-full" />
+			{/if}
+		{/each}
 	{/if}
-{/each}
+{/if}
+
+<!-- Room Content -->
+{#if roomId !== 0}
+	<div class="flex justify-between animate__animated animate__fadeIn">
+		<div class="flex gap-4">
+			<button on:click={() => (roomId = 0)}>
+				<Icon icon="ph:arrow-left-bold" width="24" />
+			</button>
+			<div class="flex flex-col">
+				<span class="text-primary-blue font-bold text-base">{datas[roomId - 1].title}</span>
+				<span class="text-black"
+					>{datas[roomId - 1].total_participants !== 0
+						? `${datas[roomId - 1].total_participants} Participants`
+						: ''}</span
+				>
+			</div>
+		</div>
+		<button class=" ms-7" on:click={() => (roomId = 0)}>
+			<Icon icon="ic:round-close" width="24" />
+		</button>
+	</div>
+	<hr />
+	{#if isMessageLoading}
+		<div class="flex flex-col items-center justify-center m-auto gap-4">
+			<Icon icon="line-md:loading-twotone-loop" width="48" />
+			<span class="">Loading Chats ...</span>
+		</div>
+	{:else if messages.length > 0}
+		<div
+			class="overflow-y-auto overflow-x-hidden flex flex-col gap-4 h-full animate__animated animate__fadeIn"
+		>
+			{#each messages as message, i}
+				<div class="flex flex-col">
+					{#if message.user_id === 1}
+						<div class="flex flex-col items-end self-end max-w-md w-fit">
+							<span class="text-chat-purple-hover">You</span>
+							<div class="flex flex-row-reverse gap-2">
+								<div class="flex flex-col bg-chat-purple p-2 rounded">
+									<span>{message.message}</span>
+									<span>{message.date}</span>
+								</div>
+								<div class="dropdown">
+									<div tabindex="0" role="button" class="">
+										<Icon icon="tabler:dots" width="24" />
+									</div>
+									<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+									<ul
+										tabindex="0"
+										class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+									>
+										<li><span class=" text-primary-blue">Edit</span></li>
+										<li><span class="text-indicator-red">Delete</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					{:else if message.user_id !== 1 && message.user_id !== 0}
+						<div class="flex flex-col self-start max-w-md w-fit">
+							<span
+								class={`${
+									message.user_id === 2 ? 'text-chat-yellow-hover' : 'text-chat-green-hover'
+								}`}>{message.user}</span
+							>
+							<div class="flex gap-2">
+								<div
+									class={`flex flex-col p-2 rounded ${
+										message.user_id === 2
+											? 'bg-chat-yellow'
+											: message.user_id === 3
+											  ? 'bg-chat-green'
+											  : ' bg-gray-100'
+									}`}
+								>
+									<span>{message.message}</span>
+									<span>{message.date}</span>
+								</div>
+								<div class="dropdown">
+									<div tabindex="0" role="button" class="">
+										<Icon icon="tabler:dots" width="24" />
+									</div>
+									<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+									<ul
+										tabindex="0"
+										class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+									>
+										<li><span class=" text-primary-blue">Edit</span></li>
+										<li><span class="text-indicator-red">Delete</span></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					{/if}
+					{#if message.user_id === 0}
+						<div class="flex gap-4 items-center">
+							<hr class="border-[1px] border-primary-light-grey w-full" />
+							<span class="font-bold w-full text-center">{message.date}</span>
+							<hr class="border-[1px] border-primary-light-grey w-full" />
+						</div>
+					{/if}
+				</div>
+			{/each}
+		</div>
+		{#if datas[roomId - 1].room_id === 4}
+			<div class="flex gap-4 bg-blue-100 p-[10px] rounded">
+				<Icon icon="line-md:loading-twotone-loop" width="24" />
+				<span>Please wait while we connect you with one of our team ...</span>
+			</div>
+		{/if}
+		<div class="flex gap-4">
+			<input type="text" placeholder="Add Text ..." class="input input-bordered py-3 px-4 w-full" />
+			<button class="btn btn-primary text-white px-[16px] py-[8px]">Send</button>
+		</div>
+	{:else}
+		<div class="flex flex-col items-center justify-center m-auto gap-4">
+			<Icon icon="bx:bxs-message-square-x" width="64" />
+			<span class="">No messages yet</span>
+		</div>
+		<div class="flex gap-4">
+			<input type="text" placeholder="Add Text ..." class="input input-bordered py-3 px-4 w-full" />
+			<button class="btn btn-primary text-white px-[16px] py-[8px]">Send</button>
+		</div>
+	{/if}
+{/if}
