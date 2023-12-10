@@ -21,7 +21,7 @@
 		});
 		setTimeout(() => {
 			isMessageLoading = false;
-		}, 10);
+		}, 2000);
 	}
 
 	function reply(message, user) {
@@ -34,7 +34,7 @@
 		setTimeout(() => {
 			isMessageLoading = false;
 			datas = users;
-		}, 10);
+		}, 2000);
 	});
 </script>
 
