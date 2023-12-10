@@ -2,11 +2,9 @@
 	import InboxContent from '$components/inboxContent.svelte';
 	import TaskContent from '$components/taskContent.svelte';
 
-	let showMenu = true;
-	let taskMenu = true;
+	let showMenu = false;
+	let taskMenu = false;
 	let inboxMenu = false;
-
-	let users = [];
 
 	function handleTaskMenu() {
 		taskMenu = !taskMenu;

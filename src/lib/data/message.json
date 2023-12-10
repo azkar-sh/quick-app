@@ -12,25 +12,34 @@
 				"user": "Chameron Phillips",
 				"user_id": 1,
 				"message": "Please check this out!",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Obaidullah Amarkhil",
 				"user_id": 3,
 				"message": "Cool, where do you find this?",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Chameron Phillips",
 				"user_id": 1,
 				"message": "I found it on the internet",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Chameron Phillips",
 				"user_id": 1,
 				"message": "I found it when I was searching for something",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {
+					"user": "Obaidullah Amarkhil",
+					"user_id": 3,
+					"message": "Cool, where do you find this?",
+					"date": "19:32"
+				}
 			}
 		]
 	},
@@ -47,73 +56,97 @@
 				"user": "Ellen",
 				"user_id": 1,
 				"message": "Hey, please read",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Ellen",
 				"user_id": 1,
 				"message": "No Worries, It will be complated ASAP. I've asked him yesterday.",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Mary Hilda",
 				"user_id": 2,
 				"message": "Hello Obaidullah, I will be your case advisor for case #029290. I have assigned some homework for you to fill. Please keep up with the due dates. Should you have any questions, you can message me anytime. Thanks.",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Ellen",
 				"user_id": 1,
 				"message": "Please contact Mary for questions regarding the case bcs she will be managing your forms from now on! Thanks Mary.",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Mary Hilda",
 				"user_id": 2,
 				"message": "Sure thing, Claren.",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "",
 				"user_id": 0,
 				"message": "",
-				"date": "Today June 09, 2021"
+				"date": "Today June 09, 2021",
+				"reply": {}
 			},
 			{
 				"user": "Obaidullah Amarkhil",
 				"user_id": 3,
 				"message": "Morning. I’ll try to do them. Thanks.",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Mary Hilda",
 				"user_id": 2,
 				"message": "Just Fill me in for his updates yea?",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Ellen",
 				"user_id": 1,
 				"message": "No worries. It will be completed ASAP. I’ve asked him yesterday..",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Mary Hilda",
 				"user_id": 2,
 				"message": "Hello Obaidullah, I will be your case advisor for case #029290. I have assigned some homework for you to fill. Please keep up with the due dates. Should you have any questions, you can message me anytime. Thanks.",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Ellen",
 				"user_id": 1,
 				"message": "Please contact Mary for questions regarding the case bcs she will be managing your forms from now on! Thanks Mary.",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
 			},
 			{
 				"user": "Mary Hilda",
 				"user_id": 2,
 				"message": "Sure thing ,Claren.",
-				"date": "19:32"
+				"date": "19:32",
+				"reply": {}
+			},
+			{
+				"user": "Ellen",
+				"user_id": 1,
+				"message": "Thank You Marry. I will keep you updated.",
+				"date": "19:32",
+				"reply": {
+					"user": "Mary Hilda",
+					"user_id": 2,
+					"message": "Sure thing ,Claren.",
+					"date": "19:32"
+				}
 			}
 		]
 	},

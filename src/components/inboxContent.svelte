@@ -6,6 +6,8 @@
 	let datas = [];
 	let roomId = 0;
 	let isMessageLoading = false;
+	let replyMessage = '';
+	let replyUser = '';
 
 	let messages = [];
 
@@ -19,7 +21,12 @@
 		});
 		setTimeout(() => {
 			isMessageLoading = false;
-		}, 2000);
+		}, 10);
+	}
+
+	function reply(message, user) {
+		replyMessage = message;
+		replyUser = user;
 	}
 
 	onMount(() => {
@@ -27,7 +34,7 @@
 		setTimeout(() => {
 			isMessageLoading = false;
 			datas = users;
-		}, 2000);
+		}, 10);
 	});
 </script>
 
@@ -112,23 +119,32 @@
 					{#if message.user_id === 1}
 						<div class="flex flex-col items-end self-end max-w-md w-fit">
 							<span class="text-chat-purple-hover">You</span>
-							<div class="flex flex-row-reverse gap-2">
-								<div class="flex flex-col bg-chat-purple p-2 rounded">
-									<span>{message.message}</span>
-									<span>{message.date}</span>
-								</div>
-								<div class="dropdown">
-									<div tabindex="0" role="button" class="">
-										<Icon icon="tabler:dots" width="24" />
+
+							<div class="flex flex-col gap-2">
+								{#if message.reply && message.reply.message}
+									<div class=" bg-primary-cream border border-grey-300 rounded-md p-2">
+										<span>{message.reply.message ? message.reply.message : ''}</span>
 									</div>
-									<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-									<ul
-										tabindex="0"
-										class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-									>
-										<li><span class=" text-primary-blue">Edit</span></li>
-										<li><span class="text-indicator-red">Delete</span></li>
-									</ul>
+								{/if}
+								<div class="flex flex-row-reverse gap-2">
+									<div class="flex flex-col bg-chat-purple p-2 rounded">
+										<span>{message.message}</span>
+										<span>{message.date}</span>
+									</div>
+									<div class="dropdown">
+										<div tabindex="0" role="button" class="">
+											<Icon icon="tabler:dots" width="24" />
+										</div>
+										<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+										<ul
+											tabindex="0"
+											class="dropdown-content z-[1] menu p-2 shadow bg-base-100 border-primary-light-grey rounded-md w-28"
+										>
+											<li><span class=" text-primary-blue hover:bg-blue-50">Edit</span></li>
+
+											<li><span class="text-indicator-red hover:bg-red-50">Delete</span></li>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -152,17 +168,24 @@
 									<span>{message.message}</span>
 									<span>{message.date}</span>
 								</div>
-								<div class="dropdown">
+								<div class="dropdown dropdown-end">
 									<div tabindex="0" role="button" class="">
 										<Icon icon="tabler:dots" width="24" />
 									</div>
 									<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 									<ul
 										tabindex="0"
-										class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+										class="dropdown-content z-[1] menu p-2 shadow border-primary-light-grey bg-base-100 rounded-md w-28"
 									>
-										<li><span class=" text-primary-blue">Edit</span></li>
-										<li><span class="text-indicator-red">Delete</span></li>
+										<li><span class=" text-primary-blue hover:bg-blue-50">Share</span></li>
+										<hr />
+										<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+										<li
+											on:click={reply(message.message, message.user)}
+											on:keydown={reply(message.message, message.user)}
+										>
+											<span class=" text-primary-blue hover:bg-blue-50">Reply</span>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -184,8 +207,37 @@
 				<span>Please wait while we connect you with one of our team ...</span>
 			</div>
 		{/if}
-		<div class="flex gap-4">
-			<input type="text" placeholder="Add Text ..." class="input input-bordered py-3 px-4 w-full" />
+		<div class="flex gap-4 items-end">
+			<div class="w-full">
+				{#if replyMessage && replyUser}
+					<div
+						class="flex flex-col gap-1 bg-primary-cream p-3 rounded-t-md border-t border-x border-black animate__animated animate__fadeIn"
+					>
+						<div class="flex justify-between">
+							<span class=" text-primary-dark-grey font-semibold"
+								>{replyUser ? `Replying to ${replyUser}` : ''}</span
+							>
+							<button
+								class=""
+								on:click={() => {
+									replyMessage = '';
+									replyUser = '';
+								}}
+							>
+								<Icon icon="ic:round-close" width="24" />
+							</button>
+						</div>
+						<span class="text-primary-dark-grey">{replyMessage ? replyMessage : ''}</span>
+					</div>
+				{/if}
+				<input
+					type="text"
+					placeholder="Add Text ..."
+					class={`input input-bordered py-3 px-4 w-full  ${
+						replyMessage && replyUser ? 'rounded-t-none' : ''
+					}`}
+				/>
+			</div>
 			<button class="btn btn-primary text-white px-[16px] py-[8px]">Send</button>
 		</div>
 	{:else}

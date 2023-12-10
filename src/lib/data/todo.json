@@ -1,66 +1,150 @@
 [
 	{
-		"task_id": "1",
+		"task_id": 1,
 		"task_title": "Close off Case #012920- RODRIGUES, Amiguel",
-		"task_date": "12/06/2021",
+		"task_date": "1623456000",
 		"task_description": "Closing off this case since this application has been cancelled. No one really understand how this case could possibly be cancelled. The options and the documents within this document were totally a guaranteed for a success!",
 		"task_due": "2 Days Left",
-		"task_complete": false
+		"task_complete": false,
+		"task_tags": [
+			{
+				"tag_id": 1,
+				"tag_name": "Important ASAP"
+			},
+			{
+				"tag_id": 2,
+				"tag_name": "Offline Meeting"
+			}
+		]
 	},
 	{
-		"task_id": "2",
+		"task_id": 2,
 		"task_title": "Set up documentation report for several Cases : Case 145443, Case 192829 and Case 182203",
-		"task_date": "14/06/2021",
+		"task_date": "1623628800",
 		"task_description": "All Cases must include all payment transactions, all documents and forms filled. All conversations in comments and messages in channels and emails should be provided as well in.",
 		"task_due": "4 Days Left",
-		"task_complete": false
+		"task_complete": false,
+		"task_tags": [
+			{
+				"tag_id": 1,
+				"tag_name": "Important ASAP"
+			},
+			{
+				"tag_id": 2,
+				"tag_name": "Offline Meeting"
+			},
+			{
+				"tag_id": 8,
+				"tag_name": "Court Related"
+			}
+		]
 	},
 	{
-		"task_id": "3",
+		"task_id": 3,
 		"task_title": "Set up appointment with Dr Blake",
-		"task_date": "22/06/2021",
+		"task_date": "1624320000",
 		"task_description": "",
 		"task_due": "10 Days Left",
-		"task_complete": false
+		"task_complete": false,
+		"task_tags": [
+			{
+				"tag_id": 1,
+				"tag_name": "Important ASAP"
+			},
+			{
+				"tag_id": 5,
+				"tag_name": "Client Related"
+			},
+			{
+				"tag_id": 7,
+				"tag_name": "Appointments"
+			}
+		]
 	},
 	{
-		"task_id": "4",
+		"task_id": 4,
 		"task_title": "Contact Mr Caleb - video conference?",
-		"task_date": "3/06/2021",
+		"task_date": "1622678400",
 		"task_description": "Contact Mr Caleb to discuss about video conference.",
 		"task_due": "",
-		"task_complete": true
+		"task_complete": true,
+		"task_tags": [
+			{
+				"tag_id": 2,
+				"tag_name": "Offline Meeting"
+			}
+		]
 	},
 	{
-		"task_id": "5",
+		"task_id": 5,
 		"task_title": "Assign 3 homework to Client A",
-		"task_date": "2/06/2021",
-		"task_description": "This is the description of the fifth task",
+		"task_date": "1622592000",
+		"task_description": "Assign 3 homework to Client A : Client Profile Questionnaire, Passport Requirements and Images, Personal Documents.",
 		"task_due": "",
-		"task_complete": true
+		"task_complete": true,
+		"task_tags": [
+			{
+				"tag_id": 1,
+				"tag_name": "Important ASAP"
+			},
+			{
+				"tag_id": 5,
+				"tag_name": "Client Related"
+			},
+			{
+				"tag_id": 3,
+				"tag_name": "Virtual Meeting"
+			},
+			{
+				"tag_id": 6,
+				"tag_name": "Self Task"
+			}
+		]
 	},
 	{
-		"task_id": "6",
+		"task_id": 6,
 		"task_title": "Cross-reference with Jeanne for Case #192813",
-		"task_date": "12/06/2021",
+		"task_date": "1623456000",
 		"task_description": "",
 		"task_due": "2 Days Left",
-		"task_complete": false
+		"task_complete": false,
+		"task_tags": [
+			{
+				"tag_id": 2,
+				"tag_name": "Offline Meeting"
+			}
+		]
 	},
 	{
-		"task_id": "7",
+		"task_id": 7,
 		"task_title": "Contact Andrew for Online Meeting and Conference",
-		"task_date": "3/06/2021",
+		"task_date": "1622678400",
 		"task_description": "Online Meeting and Conference with Andrew to discuss about the new project.",
 		"task_due": "",
-		"task_complete": true
+		"task_complete": true,
+		"task_tags": [
+			{
+				"tag_id": 2,
+				"tag_name": "Offline Meeting"
+			},
+			{
+				"tag_id": 7,
+				"tag_name": "Appointments"
+			}
+		]
 	},
 	{
-		"task_id": "8",
+		"task_id": 8,
 		"task_title": "Check and Revise Homework from Andre Gonzales",
-		"task_date": "11/06/2021",
+		"task_date": "1623369600",
 		"task_description": "Homeworks needed to be checked are as follows : Client Profile Questionnaire, Passport Requirements and Images, Personal Documents.",
 		"task_due": "1 Day Left",
-		"task_complete": false
+		"task_complete": false,
+		"task_tags": [
+			{
+				"tag_id": 6,
+				"tag_name": "Self Task"
+			}
+		]
 	}
 ]

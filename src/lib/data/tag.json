@@ -1,0 +1,34 @@
+[
+	{
+		"tag_id": 1,
+		"tag_name": "Important ASAP"
+	},
+	{
+		"tag_id": 2,
+		"tag_name": "Online Meeting"
+	},
+	{
+		"tag_id": 3,
+		"tag_name": "Virtual Meeting"
+	},
+	{
+		"tag_id": 4,
+		"tag_name": "ASAP"
+	},
+	{
+		"tag_id": 5,
+		"tag_name": "Client Related"
+	},
+	{
+		"tag_id": 6,
+		"tag_name": "Self Task"
+	},
+	{
+		"tag_id": 7,
+		"tag_name": "Appointments"
+	},
+	{
+		"tag_id": 7,
+		"tag_name": "Court Related"
+	}
+]

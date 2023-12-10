@@ -1,9 +1,12 @@
 <script>
 	import Icon from '@iconify/svelte';
 	import todo from '$json/todo.json';
+	import tags from '$json/tag.json';
 	import { onMount } from 'svelte';
+	import Flatpickr from 'svelte-flatpickr';
 
 	let datas = [];
+
 	let isLoadingData = false;
 	let editDescription = false;
 	let editDescriptionId = 0;
@@ -27,6 +30,32 @@
 
 	function handleShowAddTask() {
 		addTask = !addTask;
+
+		if (addTask) {
+			const addTaskSection = document.getElementById('add-task-section');
+
+			addTaskSection.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+				inline: 'nearest'
+			});
+		}
+	}
+
+	function handleConvertEpoch(epoch, format) {
+		let date = new Date(epoch * 1000);
+		let year = date.getFullYear();
+		let month = date.getMonth() + 1;
+		let day = date.getDate();
+		let hour = date.getHours();
+		let min = date.getMinutes();
+		let sec = date.getSeconds();
+		let time = `${year}-${month}-${day} ${hour}:${min}:${sec}`;
+		if (format === 'date') {
+			return `${day}/${month}/${year}`;
+		} else {
+			return time;
+		}
 	}
 
 	onMount(() => {
@@ -82,7 +111,7 @@
 							>
 							<div class="flex items-center gap-4 me-2">
 								<span class="text-sm text-indicator-red">{data.task_due}</span>
-								<span>{data.task_date}</span>
+								<span>{handleConvertEpoch(data.task_date, 'date')}</span>
 								{#if showDetailId === data.task_id || data.task_complete === false}
 									<Icon icon="iconamoon:arrow-down-2-bold" width="20" />
 								{:else}
@@ -103,15 +132,30 @@
 							</div>
 						</div>
 
-						<div class="collapse-content flex flex-col gap-4 mt-4">
-							<div class="flex flex-row gap-2">
+						<div class="collapse-content flex flex-col gap-4 mt-4 z-10">
+							<!-- Due Date -->
+							<div class="flex flex-row gap-4 items-center p-2">
 								<Icon icon="mingcute:time-line" width="20" class="text-primary-blue" />
+								<div class="flex flex-row items-center border rounded">
+									<Flatpickr
+										class="input focus:border-white focus:outline-none"
+										options={{
+											dateFormat: 'Y-m-d',
+											altFormat: 'Y-m-d',
+											time_24hr: true,
+											defaultDate: handleConvertEpoch(data.task_date)
+										}}
+									/>
+									<Icon icon="uil:calender" width="20" class="text-primary-light-grey me-2" />
+								</div>
 							</div>
-							<div class="flex flex-row gap-2">
+
+							<!-- Description -->
+							<div class="flex flex-row gap-4 p-2">
 								<button class="p-0 h-0" on:click={handleEditDescription(data.task_id)}>
 									<Icon icon="material-symbols:edit" width="20" class="text-primary-blue" />
 								</button>
-								{#if editDescriptionId === data.task_id}
+								{#if editDescriptionId === data.task_id && data.task_complete === false}
 									<textarea
 										class="textarea w-5/6 leading-5 textarea-bordered border-primary-light-grey placeholder:text-black focus:border-white rounded"
 										rows="3"
@@ -127,6 +171,83 @@
 									>
 								{/if}
 							</div>
+
+							<!-- Tags -->
+							<div class="flex flex-row gap-4 items-center bg-gray-100 p-2 rounded-md">
+								<div class="dropdown">
+									<div tabindex="0" role="button" class="add-tag">
+										<Icon
+											icon="fluent:bookmark-multiple-16-regular"
+											width="20"
+											class="text-primary-blue"
+										/>
+									</div>
+
+									<ul
+										tabindex="0"
+										class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 overflow-y-auto"
+									>
+										<li>
+											<span class="bg-blue-100 px-3 py-1 rounded-md">Important ASAP</span>
+										</li>
+										<li>
+											<span class="bg-sticker-orange px-3 py-1 rounded-md">Offline Meeting</span>
+										</li>
+										<li>
+											<span class="bg-sticker-light-orange px-3 py-1 rounded-md"
+												>Virtual Meeting</span
+											>
+										</li>
+										<li>
+											<span class="bg-sticker-blue px-3 py-1 rounded-md">ASAP</span>
+										</li>
+										<li>
+											<span class="bg-sticker-green px-3 py-1 rounded-md">Client Related</span>
+										</li>
+										<li>
+											<span class="bg-sticker-purple px-3 py-1 rounded-md">Self Task</span>
+										</li>
+										<li>
+											<span class="bg-sticker-light-purple px-3 py-1 rounded-md">Appointments</span>
+										</li>
+										<li>
+											<span class="bg-blue-300 px-3 py-1 rounded-md">Court Related</span>
+										</li>
+									</ul>
+								</div>
+
+								<div class="flex flex-row items-center gap-2">
+									{#if data.task_tags.length > 0}
+										{#each data.task_tags as tag}
+											{#if tag.tag_id === 1}
+												<span class="bg-blue-100 px-3 py-1 rounded-md">{tag.tag_name}</span>
+											{:else if tag.tag_id === 2}
+												<span class="bg-sticker-orange px-3 py-1 rounded-md">{tag.tag_name}</span>
+											{:else if tag.tag_id === 3}
+												<span class="bg-sticker-light-orange px-3 py-1 rounded-md"
+													>{tag.tag_name}</span
+												>
+											{:else if tag.tag_id === 4}
+												<span class="bg-sticker-blue px-3 py-1 rounded-md">{tag.tag_name}</span>
+											{:else if tag.tag_id === 5}
+												<span class="bg-sticker-green px-3 py-1 rounded-md">{tag.tag_name}</span>
+											{:else if tag.tag_id === 6}
+												<span class="bg-sticker-purple px-3 py-1 rounded-md">{tag.tag_name}</span>
+											{:else if tag.tag_id === 7}
+												<span class="bg-sticker-light-purple px-3 py-1 rounded-md"
+													>{tag.tag_name}</span
+												>
+											{:else if tag.tag_id === 8}
+												<span class="bg-blue-300 px-3 py-1 rounded-md">{tag.tag_name}</span>
+											{:else}
+												<span class="bg-blueGray-100 px-3 py-1 rounded-md">{tag.tag_name}</span>
+											{/if}
+										{/each}
+									{:else}
+										<span class="text-sm text-primary-blue">No Tags</span>
+									{/if}
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -135,9 +256,10 @@
 				<hr />
 			{/if}
 		{/each}
-		{#if addTask}
-			<hr />
-			<div class="flex flex-col gap-4 mb-10">
+
+		<div id="add-task-section">
+			<hr class="mb-[22px]" />
+			<div class="flex flex-col gap-4 mb-32">
 				<div class="flex flex-row items-start justify-between">
 					<div class="flex flex-row items-start gap-6">
 						<input
@@ -164,10 +286,19 @@
 				</div>
 
 				<div class="flex flex-col gap-4 ms-10">
-					<div class="flex flex-row gap-2">
+					<div class="flex flex-row gap-4 items-center">
 						<Icon icon="mingcute:time-line" width="20" class="text-primary-blue" />
+						<Flatpickr
+							class="input input-bordered rounded p-3"
+							options={{
+								enableTime: true,
+								dateFormat: 'Y-m-d',
+								time_24hr: true,
+								defaultDate: new Date()
+							}}
+						/>
 					</div>
-					<div class="flex flex-row gap-2">
+					<div class="flex flex-row gap-4">
 						<button class="p-0 h-0">
 							<Icon icon="material-symbols:edit" width="20" class="text-primary-blue" />
 						</button>
@@ -178,13 +309,44 @@
 							placeholder="Add Description"
 						></textarea>
 					</div>
+
+					<div class="flex flex-row items-center bg-gray-100 p-2 rounded-md">
+						<Icon icon="fluent:bookmark-multiple-16-regular" width="20" class="text-primary-blue" />
+						<select class="select select-ghost">
+							<option disabled selected>Add Tag</option>
+							<option value="1" class="bg-blue-100 px-3 py-1 rounded-md">
+								<span>Important ASAP</span>
+							</option>
+							<option value="2" class="bg-sticker-orange px-3 py-1 rounded-md">
+								<span>Offline Meeting</span>
+							</option>
+							<option value="3" class="bg-sticker-light-orange px-3 py-1 rounded-md">
+								<span>Virtual Meeting</span>
+							</option>
+							<option value="4" class="bg-sticker-blue px-3 py-1 rounded-md">
+								<span>ASAP</span>
+							</option>
+							<option value="5" class="bg-sticker-green px-3 py-1 rounded-md">
+								<span>Client Related</span>
+							</option>
+							<option value="6" class="bg-sticker-purple px-3 py-1 rounded-md">
+								<span>Self Task</span>
+							</option>
+							<option value="7" class="bg-sticker-light-purple px-3 py-1 rounded-md">
+								<span>Appointments</span>
+							</option>
+							<option value="8" class="bg-blue-300 px-3 py-1 rounded-md">
+								<span>Court Related</span>
+							</option>
+						</select>
+					</div>
 				</div>
 
 				<div class="ms-10">
 					<button class="btn bg-primary-blue text-white border-0">Add Task</button>
 				</div>
 			</div>
-		{/if}
+		</div>
 	</div>
 {/if}
 
