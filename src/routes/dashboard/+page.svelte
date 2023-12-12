@@ -30,14 +30,13 @@
 			<img src="/icons/magnifying.svg" alt="" class="p-3 bg-primary-dark-grey w-10" />
 			<input
 				type="text"
-				placeholder="Type here"
+				placeholder=""
 				class="input w-full rounded-none bg-primary-dark-grey focus:outline-none focus:ring-0 text-white"
 			/>
 		</div>
 
 		<div class="self-end p-10 flex flex-col items-end gap-5">
 			<!-- Quick Content -->
-
 			<div
 				class={`w-[734px] h-[737px] py-[24px] px-[32px] bg-white rounded-md flex flex-col gap-[22px]  ${
 					taskMenu || inboxMenu ? 'visible animate__animated animate__zoomIn' : 'hidden '
@@ -56,25 +55,43 @@
 			<div class=" flex flex-row items-end gap-5">
 				<div class={`show-menu ${showMenu ? 'visible' : 'hidden'}`}>
 					{#if taskMenu}
-						<button class="flex flex-col items-center gap-2 w-16" on:click={handleInboxMenu}>
+						<button
+							class="flex flex-col items-center gap-2 w-16 hover:contrast-75 active:scale-90 animate__animated animate__zoomIn"
+							on:click={handleInboxMenu}
+						>
 							<img src="/icons/btn-inbox.svg" alt="" />
 						</button>
-						<button class="flex flex-col items-center gap-2 w-[72px]" on:click={handleTaskMenu}>
+						<button
+							class="flex flex-col items-center gap-2 w-[72px] hover:contrast-75 active:scale-90 animate__animated animate__slideInLeft"
+							on:click={handleTaskMenu}
+						>
 							<img src="/icons/btn-task-open.svg" alt="" />
 						</button>
 					{:else if inboxMenu}
-						<button class="flex flex-col items-center gap-2 w-16" on:click={handleTaskMenu}>
+						<button
+							class="flex flex-col items-center gap-2 w-16 hover:contrast-75 active:scale-90 animate__animated animate__zoomIn"
+							on:click={handleTaskMenu}
+						>
 							<img src="/icons/btn-task.svg" alt="" />
 						</button>
-						<button class="flex flex-col items-center gap-2 w-[72px]" on:click={handleInboxMenu}>
+						<button
+							class="flex flex-col items-center gap-2 w-[72px] hover:contrast-75 active:scale-90 animate__animated animate__slideInLeft"
+							on:click={handleInboxMenu}
+						>
 							<img src="/icons/btn-inbox-open.svg" alt="" />
 						</button>
 					{:else}
-						<button class="flex flex-col items-center gap-2 w-16" on:click={handleTaskMenu}>
+						<button
+							class="flex flex-col items-center gap-2 w-16 hover:contrast-75 active:scale-90 animate__animated animate__slideInRight"
+							on:click={handleTaskMenu}
+						>
 							<span class="text-white">Task</span>
 							<img src="/icons/btn-task.svg" alt="" />
 						</button>
-						<button class="flex flex-col items-center gap-2 w-16" on:click={handleInboxMenu}>
+						<button
+							class="flex flex-col items-center gap-2 w-16 hover:contrast-75 active:scale-90 animate__animated animate__slideInRight"
+							on:click={handleInboxMenu}
+						>
 							<span class="text-white">Inbox</span>
 							<img src="/icons/btn-inbox.svg" alt="" />
 						</button>
@@ -82,7 +99,7 @@
 				</div>
 
 				<button
-					class={`z-10 w-16 ${taskMenu || inboxMenu ? 'hidden' : ''}`}
+					class={`z-10 w-16 active:scale-90 ${taskMenu || inboxMenu ? 'hidden' : ''}`}
 					on:click={handleQuickMenu}
 				>
 					<img src="/icons/btn-quick.svg" alt="" />
