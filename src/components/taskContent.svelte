@@ -6,7 +6,7 @@
 	import Flatpickr from 'svelte-flatpickr';
 
 	let datas = [];
-	let tagsData = tags;
+	let tagsData = [];
 
 	let isLoadingData = false;
 	let editDescription = false;
@@ -16,12 +16,14 @@
 	let showDetailId = 0;
 	let showTagsList = false;
 	let showTagsListId = 0;
+	let showTagsListChoice = false;
 	let taggedData = [];
 
 	function fetchTodoList() {
 		isLoadingData = true;
 		setTimeout(() => {
 			datas = todo;
+			tagsData = tags;
 			isLoadingData = false;
 		}, 2000);
 	}
@@ -356,34 +358,84 @@
 					</div>
 
 					<div class="flex flex-row items-center bg-gray-100 p-2 rounded-md">
-						<Icon icon="fluent:bookmark-multiple-16-regular" width="20" class="text-primary-blue" />
-						<select class="select select-ghost">
-							<option disabled selected>Add Tag</option>
-							<option value="1" class="bg-blue-100 px-3 py-1 rounded-md">
-								<span>Important ASAP</span>
-							</option>
-							<option value="2" class="bg-sticker-orange px-3 py-1 rounded-md">
-								<span>Offline Meeting</span>
-							</option>
-							<option value="3" class="bg-sticker-light-orange px-3 py-1 rounded-md">
-								<span>Virtual Meeting</span>
-							</option>
-							<option value="4" class="bg-sticker-blue px-3 py-1 rounded-md">
-								<span>ASAP</span>
-							</option>
-							<option value="5" class="bg-sticker-green px-3 py-1 rounded-md">
-								<span>Client Related</span>
-							</option>
-							<option value="6" class="bg-sticker-purple px-3 py-1 rounded-md">
-								<span>Self Task</span>
-							</option>
-							<option value="7" class="bg-sticker-light-purple px-3 py-1 rounded-md">
-								<span>Appointments</span>
-							</option>
-							<option value="8" class="bg-blue-300 px-3 py-1 rounded-md">
-								<span>Court Related</span>
-							</option>
-						</select>
+						<div class="relative">
+							<div class="flex items-center gap-2">
+								<button
+									on:click={() => {
+										showTagsListChoice = !showTagsListChoice;
+									}}
+								>
+									<Icon
+										icon="fluent:bookmark-multiple-16-regular"
+										width="20"
+										class="text-primary-blue"
+									/>
+								</button>
+								<span>Add tag</span>
+							</div>
+							{#if showTagsListChoice}
+								<div
+									class={`absolute flex flex-col justify-center bottom-12 gap-1 p-1 rounded-md bg-white shadow-md border-2 border-gray-50 h-[180px] w-max flex-wrap`}
+								>
+									{#each tagsData as tag}
+										<div class="tag-checkbox">
+											<input type="checkbox" id="tags-{tag.tag_id}" />
+											<label for="tags-{tag.tag_id}" class="">
+												{#if tag.tag_id === 1}
+													<div
+														class="bg-blue-100 px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+													>
+														<span class=" text-sm">{tag.tag_name}</span>
+													</div>
+												{:else if tag.tag_id === 2}
+													<div
+														class="bg-sticker-orange px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+													>
+														<span class=" text-sm">{tag.tag_name}</span>
+													</div>
+												{:else if tag.tag_id === 3}
+													<div
+														class="bg-sticker-light-orange px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+													>
+														<span class=" text-sm">{tag.tag_name}</span>
+													</div>
+												{:else if tag.tag_id === 4}
+													<div
+														class="bg-sticker-blue px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+													>
+														<span class=" text-sm">{tag.tag_name}</span>
+													</div>
+												{:else if tag.tag_id === 5}
+													<div
+														class="bg-sticker-green px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+													>
+														<span class=" text-sm">{tag.tag_name}</span>
+													</div>
+												{:else if tag.tag_id === 6}
+													<div
+														class="bg-sticker-purple px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+													>
+														<span class=" text-sm">{tag.tag_name}</span>
+													</div>
+												{:else if tag.tag_id === 7}
+													<div
+														class="bg-sticker-light-purple px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+													>
+														<span class=" text-sm">{tag.tag_name}</span>
+													</div>
+												{:else if tag.tag_id === 8}
+													<div
+														class="bg-blue-300 px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+													>
+														<span class=" text-sm">{tag.tag_name}</span>
+													</div>
+												{/if}
+											</label>
+										</div>
+									{/each}
+								</div>
+							{/if}
+						</div>
 					</div>
 				</div>
 

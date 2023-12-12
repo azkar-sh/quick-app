@@ -35,10 +35,10 @@
 			/>
 		</div>
 
-		<div class="self-end p-10 flex flex-col items-end gap-5">
+		<div class="self-end md:p-10 p-3 flex flex-col items-end gap-5">
 			<!-- Quick Content -->
 			<div
-				class={`w-[734px] h-[737px] py-[24px] px-[32px] bg-white rounded-md flex flex-col gap-[22px]  ${
+				class={`md:w-[734px] md:h-[737px] w-[370px] h-[500px] py-[24px] px-[32px] bg-white rounded-md flex flex-col gap-[22px]  ${
 					taskMenu || inboxMenu ? 'visible animate__animated animate__zoomIn' : 'hidden '
 				}`}
 			>
@@ -58,12 +58,14 @@
 						<button
 							class="flex flex-col items-center gap-2 w-16 hover:contrast-75 active:scale-90 animate__animated animate__zoomIn"
 							on:click={handleInboxMenu}
+							disabled={!showMenu}
 						>
 							<img src="/icons/btn-inbox.svg" alt="" />
 						</button>
 						<button
 							class="flex flex-col items-center gap-2 w-[72px] hover:contrast-75 active:scale-90 animate__animated animate__slideInLeft"
 							on:click={handleTaskMenu}
+							disabled={!showMenu}
 						>
 							<img src="/icons/btn-task-open.svg" alt="" />
 						</button>
@@ -71,12 +73,14 @@
 						<button
 							class="flex flex-col items-center gap-2 w-16 hover:contrast-75 active:scale-90 animate__animated animate__zoomIn"
 							on:click={handleTaskMenu}
+							disabled={!showMenu}
 						>
 							<img src="/icons/btn-task.svg" alt="" />
 						</button>
 						<button
 							class="flex flex-col items-center gap-2 w-[72px] hover:contrast-75 active:scale-90 animate__animated animate__slideInLeft"
 							on:click={handleInboxMenu}
+							disabled={!showMenu}
 						>
 							<img src="/icons/btn-inbox-open.svg" alt="" />
 						</button>
@@ -84,6 +88,7 @@
 						<button
 							class="flex flex-col items-center gap-2 w-16 hover:contrast-75 active:scale-90 animate__animated animate__slideInRight"
 							on:click={handleTaskMenu}
+							disabled={!showMenu}
 						>
 							<span class="text-white">Task</span>
 							<img src="/icons/btn-task.svg" alt="" />
@@ -91,6 +96,7 @@
 						<button
 							class="flex flex-col items-center gap-2 w-16 hover:contrast-75 active:scale-90 animate__animated animate__slideInRight"
 							on:click={handleInboxMenu}
+							disabled={!showMenu}
 						>
 							<span class="text-white">Inbox</span>
 							<img src="/icons/btn-inbox.svg" alt="" />

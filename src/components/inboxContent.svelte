@@ -52,35 +52,38 @@
 			<span class="">Loading Chats ...</span>
 		</div>
 	{:else}
-		{#each datas as data, i}
-			<div
-				class="flex gap-4 items-start animate__animated animate__fadeIn"
-				role="button"
-				tabindex="0"
-				on:click={() => {
-					roomId = data.room_id;
-					getMessages(data.room_id);
-				}}
-				on:keydown={() => {
-					roomId = data.room_id;
-					getMessages(data.room_id);
-				}}
-			>
-				<img src="/icons/user-group.svg" alt="" />
-				<div class="flex flex-col">
-					<div class="flex gap-4">
-						<span class=" text-primary-blue font-semibold">{data.title}</span>
-						<span class=" text-black">{data.date}</span>
+		<div class="overflow-y-auto flex flex-col gap-[22px]">
+			{#each datas as data, i}
+				<div
+					class="flex gap-4 items-start animate__animated animate__fadeIn"
+					role="button"
+					tabindex="0"
+					on:click={() => {
+						roomId = data.room_id;
+						getMessages(data.room_id);
+					}}
+					on:keydown={() => {
+						roomId = data.room_id;
+						getMessages(data.room_id);
+					}}
+				>
+					<img src="/icons/user-group.svg" alt="" />
+					<div class="flex flex-col">
+						<div class="flex gap-4">
+							<span class=" text-primary-blue font-semibold">{data.title}</span>
+							<span class=" text-black">{data.date}</span>
+						</div>
+						<span class="text-black font-semibold text-sm">{data.user ? `${data.user} :` : ''}</span
+						>
+						<span class="text-black">{data.latest_message}</span>
 					</div>
-					<span class="text-black font-semibold text-sm">{data.user ? `${data.user} :` : ''}</span>
-					<span class="text-black">{data.latest_message}</span>
 				</div>
-			</div>
 
-			{#if i !== datas.length - 1}
-				<hr class="border-[1px] border-primary-light-grey w-full" />
-			{/if}
-		{/each}
+				{#if i !== datas.length - 1}
+					<hr class="border-[1px] border-primary-light-grey w-full" />
+				{/if}
+			{/each}
+		</div>
 	{/if}
 {/if}
 
