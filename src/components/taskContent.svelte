@@ -6,6 +6,7 @@
 	import Flatpickr from 'svelte-flatpickr';
 
 	let datas = [];
+	let tagsData = tags;
 
 	let isLoadingData = false;
 	let editDescription = false;
@@ -13,6 +14,17 @@
 	let addTask = false;
 	let showDetail = false;
 	let showDetailId = 0;
+	let showTagsList = false;
+	let showTagsListId = 0;
+	let taggedData = [];
+
+	function fetchTodoList() {
+		isLoadingData = true;
+		setTimeout(() => {
+			datas = todo;
+			isLoadingData = false;
+		}, 2000);
+	}
 
 	function handleEditDescription(id) {
 		editDescriptionId = id;
@@ -42,6 +54,13 @@
 		}
 	}
 
+	function handleShowTagsList(id) {
+		showTagsListId = id;
+		if (showTagsListId === id) {
+			showTagsList = !showTagsList;
+		}
+	}
+
 	function handleConvertEpoch(epoch, format) {
 		let date = new Date(epoch * 1000);
 		let year = date.getFullYear();
@@ -59,11 +78,7 @@
 	}
 
 	onMount(() => {
-		isLoadingData = true;
-		setTimeout(() => {
-			isLoadingData = false;
-			datas = todo;
-		}, 2000);
+		fetchTodoList();
 	});
 </script>
 
@@ -173,48 +188,80 @@
 							</div>
 
 							<!-- Tags -->
-							<div class="flex flex-row gap-4 items-center bg-gray-100 p-2 rounded-md">
-								<div class="dropdown">
-									<div tabindex="0" role="button" class="add-tag">
-										<Icon
-											icon="fluent:bookmark-multiple-16-regular"
-											width="20"
-											class="text-primary-blue"
-										/>
-									</div>
-
-									<ul
-										tabindex="0"
-										class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 overflow-y-auto"
+							<div class="flex flex-row gap-4 items-center bg-gray-100 p-2 rounded-md relative">
+								<button
+									on:click={() => {
+										handleShowTagsList(data.task_id);
+									}}
+								>
+									<Icon
+										icon="fluent:bookmark-multiple-16-regular"
+										width="20"
+										class="text-primary-blue"
+									/>
+								</button>
+								{#if showTagsListId === data.task_id && data.task_complete === false && showTagsList}
+									<div
+										class={`absolute flex flex-col justify-center bottom-12 gap-1 p-1 rounded-md bg-white shadow-md border-2 border-gray-50 h-[180px] flex-wrap`}
 									>
-										<li>
-											<span class="bg-blue-100 px-3 py-1 rounded-md">Important ASAP</span>
-										</li>
-										<li>
-											<span class="bg-sticker-orange px-3 py-1 rounded-md">Offline Meeting</span>
-										</li>
-										<li>
-											<span class="bg-sticker-light-orange px-3 py-1 rounded-md"
-												>Virtual Meeting</span
-											>
-										</li>
-										<li>
-											<span class="bg-sticker-blue px-3 py-1 rounded-md">ASAP</span>
-										</li>
-										<li>
-											<span class="bg-sticker-green px-3 py-1 rounded-md">Client Related</span>
-										</li>
-										<li>
-											<span class="bg-sticker-purple px-3 py-1 rounded-md">Self Task</span>
-										</li>
-										<li>
-											<span class="bg-sticker-light-purple px-3 py-1 rounded-md">Appointments</span>
-										</li>
-										<li>
-											<span class="bg-blue-300 px-3 py-1 rounded-md">Court Related</span>
-										</li>
-									</ul>
-								</div>
+										{#each tagsData as tag}
+											<div class="tag-checkbox">
+												<input type="checkbox" id="tags-{tag.tag_id}" />
+												<label for="tags-{tag.tag_id}" class="">
+													{#if tag.tag_id === 1}
+														<div
+															class="bg-blue-100 px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+														>
+															<span class=" text-sm">{tag.tag_name}</span>
+														</div>
+													{:else if tag.tag_id === 2}
+														<div
+															class="bg-sticker-orange px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+														>
+															<span class=" text-sm">{tag.tag_name}</span>
+														</div>
+													{:else if tag.tag_id === 3}
+														<div
+															class="bg-sticker-light-orange px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+														>
+															<span class=" text-sm">{tag.tag_name}</span>
+														</div>
+													{:else if tag.tag_id === 4}
+														<div
+															class="bg-sticker-blue px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+														>
+															<span class=" text-sm">{tag.tag_name}</span>
+														</div>
+													{:else if tag.tag_id === 5}
+														<div
+															class="bg-sticker-green px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+														>
+															<span class=" text-sm">{tag.tag_name}</span>
+														</div>
+													{:else if tag.tag_id === 6}
+														<div
+															class="bg-sticker-purple px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+														>
+															<span class=" text-sm">{tag.tag_name}</span>
+														</div>
+													{:else if tag.tag_id === 7}
+														<div
+															class="bg-sticker-light-purple px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+														>
+															<span class=" text-sm">{tag.tag_name}</span>
+														</div>
+													{:else if tag.tag_id === 8}
+														<div
+															class="bg-blue-300 px-3 py-[2px] rounded-md border-transparent border-2 w-[150px]"
+														>
+															<span class=" text-sm">{tag.tag_name}</span>
+														</div>
+													{/if}
+												</label>
+											</div>
+										{/each}
+									</div>
+								{/if}
 
 								<div class="flex flex-row items-center gap-2">
 									{#if data.task_tags.length > 0}
@@ -239,8 +286,6 @@
 												>
 											{:else if tag.tag_id === 8}
 												<span class="bg-blue-300 px-3 py-1 rounded-md">{tag.tag_name}</span>
-											{:else}
-												<span class="bg-blueGray-100 px-3 py-1 rounded-md">{tag.tag_name}</span>
 											{/if}
 										{/each}
 									{:else}
@@ -351,5 +396,28 @@
 {/if}
 
 <style>
-	/* your styles go here */
+	.tag-checkbox {
+		position: relative;
+		cursor: pointer;
+		border: 2px solid transparent;
+	}
+
+	.tag-checkbox input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	.tag-checkbox label {
+		display: inline-block;
+		background-color: #ebf4ff;
+		border-radius: 0.375rem;
+	}
+
+	.tag-checkbox input:checked + label {
+		filter: contrast(1.3);
+		border: 1px solid blue;
+	}
 </style>
