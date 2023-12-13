@@ -6,6 +6,9 @@ Welcome! I'm Aziz Akbar Ashshiddiq.
 
 Quick App is a project developed using SvelteJs, designed to address a specific challenge. This application provides functionality to display, edit, and soon add to-do lists. Additionally, it includes a feature to view messages, resembling a chat application.
 
+**Demo:**
+Check out the [Live Demo](https://your-quick-app.netlify.app/dashboard) to see Quick App in action!
+
 ## Features
 
 - Display, edit, and upcoming addition of to-do lists.
