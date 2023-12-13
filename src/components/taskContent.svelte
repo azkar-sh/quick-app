@@ -90,8 +90,9 @@
 		<option>Personal Errands</option>
 		<option>Urgent To-Do</option>
 	</select>
-	<button class="btn bg-primary-blue text-white border-0" on:click={handleShowAddTask}
-		>New Task</button
+	<button
+		class="btn bg-primary-blue text-white border-0 hover:bg-blue-400"
+		on:click={handleShowAddTask}>New Task</button
 	>
 </div>
 
@@ -440,7 +441,8 @@
 				</div>
 
 				<div class="ms-10">
-					<button class="btn bg-primary-blue text-white border-0">Add Task</button>
+					<button class="btn bg-primary-blue text-white border-0 hover:bg-blue-400">Add Task</button
+					>
 				</div>
 			</div>
 		</div>
